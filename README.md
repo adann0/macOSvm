@@ -1,6 +1,4 @@
 # macvm
-macOS Install.app to Iso Image on macOS.
-
       $ ./macvm "/Applications/Install macOS <version>.app" "/out/path"
       
 <p align="center">
