@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 """
-./osxvm "/Applications/Install macOS <version>.app" /out/path
-
+$ osxvm "/Applications/Install macOS <version>.app" /out/path
 """
 
 import sys
@@ -15,19 +14,27 @@ class bcolors:
 
 def guard(msg) :
     print(msg)
-    print('=== man macOSvm ===\n./macOSvm "/Applications/Install macOS <version>.app" /out/path')
+    print('USAGE: $ osxvm "/Applications/Install macOS <version>.app" /out/path')
     exit()
 
 def main() :
-    if len(sys.argv) < 3 : guard('You miss the input or output path.\n')
-    if sys.argv[1].endswith('.app') is False : guard("Your 'Install macOS.app' Path seems to be wrong.\n")
-    if os.path.isdir(sys.argv[2]) is False : guard("Your Out Path seems to be wrong.\n")
+    
+    if len(sys.argv) < 3 : 
+        guard('You miss the input or output path.\n')
+    if sys.argv[1].endswith('.app') is False : 
+        guard("Your 'Install macOS.app' Path seems to be wrong.\n")
+    if os.path.isdir(sys.argv[2]) is False : 
+        guard("Your Out Path seems to be wrong.\n")
     i = sys.argv[1].find('Install macOS') + 14
     j = sys.argv[1].find('.app')
-    if i == -1 or j == -1 : guard("Your 'Install macOS.app' Path seems to be wrong.\n")
-    if sys.argv[2][-1] == '/' : outpath = sys.argv[2]
-    else : outpath = sys.argv[2] + '/'
+    if i == -1 or j == -1 : 
+        guard("Your 'Install macOS.app' Path seems to be wrong.\n")
+    if sys.argv[2][-1] == '/' : 
+        outpath = sys.argv[2]
+    else : 
+        outpath = sys.argv[2] + '/'
     versionname = sys.argv[1][i:j]
+    
     print (bcolors.WARNING + "$ hdiutil create -o '/tmp/" + versionname + ".cdr' -size 7316m -layout SPUD -fs HFS+J" + bcolors.ENDC)
     os.system("hdiutil create -o '/tmp/" + versionname + ".cdr' -size 7316m -layout SPUD -fs HFS+J")
     print (bcolors.WARNING + "$ hdiutil attach '/tmp/" + versionname + ".cdr.dmg' -noverify -nobrowse -mountpoint '/Volumes/install_build'" + bcolors.ENDC)
