@@ -1,6 +1,6 @@
 # osxvm
 
-You'll need the official release of macOS High Sierra or Mojave from the AppStore.
+You'll need the official release of macOS High Sierra or Mojave from the AppStore. Tested on macOS.
 
       $ ./osxvm "/Applications/Install macOS <version>.app" "/out/path"
       
